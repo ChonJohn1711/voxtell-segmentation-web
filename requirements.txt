@@ -1,0 +1,7 @@
+pydicom
+uvicorn[standard]
+fastapi
+nnunetv2
+rt-utils
+voxtell
+python-multipart

@@ -14,24 +14,6 @@
 
 </div>
 
----
-
-## About
-
-This project provides a **web-based interface** for [VoxTell](https://github.com/MIC-DKFZ/VoxTell), a state-of-the-art 3D vision-language model for medical image segmentation. VoxTell enables **natural language-driven anatomical segmentation** across CT, PET, and MRI modalities—simply describe what you want to segment in plain English.
-
-### What is VoxTell?
-
-VoxTell is a deep learning model that combines **3D image understanding** with **natural language processing** to segment anatomical structures from text prompts. Instead of traditional segmentation tools that require manual annotation or predefined labels, VoxTell accepts prompts like:
-
-- **Single organs**: `"liver"`, `"brain"`, `"left kidney"`
-- **Substructures**: `"right lung upper lobe"`, `"L5 vertebra"`
-- **Complex queries**: `"prostate tumor"`, `"pancreatic head"`
-
-The model was trained on **158 public datasets** with over **62,000 volumetric images**, covering brain, thorax, abdomen, pelvis, musculoskeletal structures, and pathological findings.
-
----
-
 ## Key Features
 
 ### 🔹 Low-VRAM Optimizations
@@ -78,8 +60,8 @@ This implementation includes **critical optimizations** to run VoxTell on consum
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/gomesgustavoo/voxtell-web-plugin.git
-cd voxtell-web-plugin
+git clone https://github.com/ChonJohn1711/voxtell-segmentation-web.git
+cd voxtell-segmentation-web
 ```
 
 ### 2. Backend Setup
@@ -105,6 +87,8 @@ Install VoxTell dependencies:
 
 ```bash
 pip install -e .
+conda install -c conda-forge nodejs nibabel -y
+python -m pip install -r requirements.txt
 ```
 
 Download the VoxTell model (see [`download_model.py`](download_model.py)):
@@ -134,7 +118,7 @@ chmod +x run.sh  # only needed once
 ./run.sh
 ```
 
-The script starts the backend (`:8000`) and the frontend (`:5173`) together. Open **`http://localhost:5173`** in your browser. Press `Ctrl+C` to stop both servers.
+The script starts the backend (`:1711`) and the frontend (`:2811`) together. Open **`http://localhost:5173`** in your browser. Press `Ctrl+C` to stop both servers.
 
 > [!NOTE]
 > The backend loads the VoxTell model at startup, which takes 30–60 seconds. The frontend will be immediately available, but inference requests will fail until the backend prints `Model loaded successfully.`
@@ -244,38 +228,3 @@ predictor.perform_everything_on_device = False
 
 VoxTell requires images in **RAS orientation** for correct left/right anatomical localization. If results seem flipped (e.g., liver appears on the wrong side), verify your NIfTI file metadata and orientation.
 
----
-
-## 📄 License
-
-This project inherits the **Apache 2.0 License** from the original [VoxTell repository](https://github.com/MIC-DKFZ/VoxTell). See [`LICENSE`](LICENSE) for details.
-
----
-
-## Acknowledgments
-
-This project builds upon [VoxTell](https://github.com/MIC-DKFZ/VoxTell) by the **Division of Medical Image Computing (MIC), German Cancer Research Center (DKFZ)**:
-
-> **Rokuss et al.** (2025). *VoxTell: Free-Text Promptable Universal 3D Medical Image Segmentation*. arXiv:2511.11450.
-
-```bibtex
-@misc{rokuss2025voxtell,
-  title={VoxTell: Free-Text Promptable Universal 3D Medical Image Segmentation}, 
-  author={Maximilian Rokuss and Moritz Langenberg and Yannick Kirchhoff and Fabian Isensee and Benjamin Hamm and Constantin Ulrich and Sebastian Regnery and Lukas Bauer and Efthimios Katsigiannopulos and Tobias Norajitra and Klaus Maier-Hein},
-  year={2025},
-  eprint={2511.11450},
-  archivePrefix={arXiv}
-}
-```
-
-Special thanks to the authors for open-sourcing this amazing work.
-
----
-
-## Contact
-
-For questions about this web interface implementation, contact:                          
-📧 https://www.linkedin.com/in/gustavoogomesss/ 
-
-For questions about the original VoxTell model, contact:  
-📧 maximilian.rokuss@dkfz-heidelberg.de / moritz.langenberg@dkfz-heidelberg.de
